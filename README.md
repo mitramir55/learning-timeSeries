@@ -25,6 +25,33 @@ to model seasonality.
 
 We need to remove these seasonality components to predict the data itself.
 
+Cycles:
+
+* When the data is related to the past data not time. E.g., when we have <b> cyclical unemployment</b>:
+the boom after resession that causes jobs to increase, then we have employment and then another round.
+
+| <img src="https://i.imgur.com/CC3TkAf.png" alt="drawing" width="600" style="text-align:center;" /> | 
+|:--:| 
+| *Serial dependence* |
+
+
+
+
+How to detect it?
+
+* We create a correlation plot for data with different time lags. then see if they are related. 
+
+* We can use the plot that shows how much each is predicting (the importance of each lagged value in predicting the last value).
+
+* We can create a plot showing the rolling average. Then if the main plot was similar to the rolling average,
+we can say it has predicting abilities. (the deseasoned averaged data will also show the same pattern.)
+
+
+| <img src="https://i.imgur.com/6nTe94E.png" alt="drawing" width="600" /> | 
+|:--:| 
+| *Partial autocorrelations of US Unemployment through lag 12 with 95% confidence intervals of no correlation.* |
+
+
 Things to consider in a time series dataset:
 
 - Seasonality: 
@@ -33,3 +60,8 @@ Things to consider in a time series dataset:
      the number of observed trends seen in the deterministic process.)
 
 - National Holidays. (we can create indicators with those.)
+
+- Cycles in the dataset. (time series self-dependency / serial dependence)
+
+- Are there any other datasets that can help us predict? For example, can we use google searches
+for flu cough to create lag features and see if they can predict future flu visits?
