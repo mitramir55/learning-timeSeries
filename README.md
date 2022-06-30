@@ -1,6 +1,10 @@
 # learning-timeSeries
 
-Finished the first session of Kaggle series. 
+
+<b>Basic definition of Time Series Analysis:</b> I think this branch of ML is just fooling itself.</br>
+You have one set of data that you use to predict the future. Y is basically X but in a lagged time.
+
+
 
 Finished second session about trend. Basically, 
 * Spline is a good library to use
@@ -49,7 +53,7 @@ we can say it has predicting abilities. (the deseasoned averaged data will also 
 
 | <img src="https://i.imgur.com/6nTe94E.png" alt="drawing" width="600" /> | 
 |:--:| 
-| *Partial autocorrelations of US Unemployment through lag 12 with 95% confidence intervals of no correlation.* |
+| *correlogram: Partial autocorrelations of US Unemployment through lag 12 with 95% confidence intervals of no correlation.* |
 
 
 Things to consider in a time series dataset:
@@ -65,3 +69,54 @@ Things to consider in a time series dataset:
 
 - Are there any other datasets that can help us predict? For example, can we use google searches
 for flu cough to create lag features and see if they can predict future flu visits?
+
+Important Plots:
+
+PACF:
+
+*  For detecting autocorrelation
+
+
+* what it does: Calculate the exact (Only the direct) effect that Xt-n has on Xt
+
+| <img src="images/pacf.png" alt="drawing" width="600" /> | 
+|:--:| 
+| *PACF* |
+
+Tutorial:
+[link](https://www.youtube.com/watch?v=5-2C4eO4cPQ)
+
+ACF:
+
+* This includes indirect effects.
+
+* pearson correlation
+
+Definitions:
+
+* Lead time: 
+How much you bring Xs forward in time
+
+| <img src="https://i.imgur.com/xwEgcOk.png" alt="drawing" width="600" /> | 
+|:--:| 
+| *time series prediction with ml algorithms* |
+
+```
+# we bring outputs forward
+def make_multistep_target(ts, steps):
+    return pd.concat(
+        {f'y_step_{i + 1}': ts.shift(-i) for i in range(steps)}, axis=1)
+
+```
+
+* Lags:
+
+```
+# we bring features back in time
+def make_lags(ts, lags, lead_time=1):
+    return pd.concat(
+        {
+            f'y_lag_{i}': ts.shift(i) for i in range(1, lags + 1)
+        },
+        axis=1)
+```
