@@ -120,3 +120,12 @@ def make_lags(ts, lags, lead_time=1):
         },
         axis=1)
 ```
+
+multi-output regression problem:
+
+How do we approach it?
+
+* Directly create a separate model for each output.
+
+* Include the output of one model for the first target in the model for the second target (a chain of inputs.)
+
