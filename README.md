@@ -125,7 +125,12 @@ multi-output regression problem:
 
 How do we approach it?
 
-* Directly create a separate model for each output.
+* Direct: Directly create a separate model for each output. (A thousand different models for a thousand future points)
 
-* Include the output of one model for the first target in the model for the second target (a chain of inputs.)
+* Recursive: Look at the last point for predicting one time in the future.
+
+* DiRec: Look at several time steps before by pushing the target forward and pulling the features backwards, so we get
+records with 1, 2, 3,..., n lagged features and also 1, 2, 3,..., steps in the future. Then the model uses these n lagged features to predict several points in the future. 
+    - take this that not all the models are able to produce multiple outputs. So you have to wrap them in another function.
+
 
